@@ -1,13 +1,11 @@
-
+import Dashboard from "./pages/Dashboard";
 
 function App() {
-  
-
   return (
     <>
-     <div>hello philos</div>
+      <Dashboard />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
