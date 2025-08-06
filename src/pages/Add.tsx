@@ -1,6 +1,6 @@
 import Aside from "../components/Aside";
-import DisplayTask from "../components/DisplayTask";
 import Navigation from "../components/Navigation";
+import TaskForm from "../components/TaskForm";
 
 export default function Dashboard() {
   return (
@@ -11,8 +11,7 @@ export default function Dashboard() {
 
       <div>
         <Navigation />
-        <DisplayTask />
-        
+        <TaskForm />
       </div>
     </div>
   );

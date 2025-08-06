@@ -14,6 +14,7 @@ export interface TaskType {
   category?: string;
   user?: string;
   completed?: boolean;
+  createdAt?: string;
 }
 
 export interface Actions {
@@ -44,11 +45,18 @@ export function TaskReducer(Tasks: TaskType[], action: Actions): TaskType[] {
           date: action.payload.date,
           user: action.payload.user,
           completed: false,
+          createdAt: new Date().toISOString().split("T")[0],
         },
       ];
 
+    case ACTIONS.SavingLocal:
+      localStorage.setItem("task", JSON.stringify(Tasks));
+      return Tasks;
+
     case ACTIONS.RemoveTask:
-      return Tasks.filter((task) => task.id !== action.payload.id);
+      const UpdateTask = Tasks.filter((task) => task.id !== action.payload.id);
+      localStorage.setItem("task", JSON.stringify(UpdateTask));
+      return UpdateTask;
 
     case ACTIONS.ToggleTask:
       return Tasks.map((task) =>
@@ -56,10 +64,6 @@ export function TaskReducer(Tasks: TaskType[], action: Actions): TaskType[] {
           ? { ...task, completed: !task.completed }
           : task
       );
-
-    case ACTIONS.SavingLocal:
-      localStorage.setItem("task", JSON.stringify(Tasks));
-      return Tasks;
     default:
       return Tasks;
   }

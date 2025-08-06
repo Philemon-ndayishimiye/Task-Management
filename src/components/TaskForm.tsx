@@ -15,7 +15,8 @@ import type {
 
 export default function TaskForm() {
   // const SavedTask = JSON.parse(localStorage.getItem("Tasks") || "[]");
-  const [tasks, dispatch] = useReducer(TaskReducer, []);
+  const SavedTasks = JSON.parse(localStorage.getItem("task") || "[]");
+  const [tasks, dispatch] = useReducer(TaskReducer, SavedTasks);
   const [formData, setFormData] = useState({
     id: "",
     name: "",
@@ -111,6 +112,7 @@ export default function TaskForm() {
         date: formData.date,
         user: formData.user,
         completed: false,
+        createdAt: new Date().toISOString().split("T")[0],
       },
     });
 
@@ -126,8 +128,6 @@ export default function TaskForm() {
         completed: false,
       },
     });
-
-     const SavedTasks = JSON.parse(localStorage.getItem("task") || "[]");
 
     setFormData({
       id: "",
@@ -159,18 +159,19 @@ export default function TaskForm() {
       </div>
 
       <div>
-        {tasks.map((task) => (
-          <span key={task.id}>
+        {tasks.map((taskSaved: TaskType) => (
+          <span key={taskSaved.id}>
             {" "}
-            {task.name} {task.priority} {task.category} {task.date} {task.user}
-            {task.completed}
+            {taskSaved.name} {taskSaved.priority} {taskSaved.category}{" "}
+            {taskSaved.date} {taskSaved.user}
+            {taskSaved.completed}
             <button
               className="border px-2 rounded-md"
               onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
                 e.preventDefault();
                 dispatch({
                   type: ACTIONS.RemoveTask,
-                  payload: { id: task.id },
+                  payload: { id: taskSaved.id },
                 });
               }}
             >
@@ -182,11 +183,11 @@ export default function TaskForm() {
                 e.preventDefault();
                 dispatch({
                   type: ACTIONS.ToggleTask,
-                  payload: { id: task.id },
+                  payload: { id: taskSaved.id },
                 });
               }}
             >
-              {task.completed ? "complete" : "incomplete"}
+              {taskSaved.completed ? "complete" : "incomplete"}
             </button>
           </span>
         ))}
