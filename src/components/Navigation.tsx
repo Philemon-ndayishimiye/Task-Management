@@ -25,7 +25,10 @@ export default function Navigation() {
         </div>
       </div>
 
-      <div>{hidden && <div>{<TaskForm />}</div>}</div>
+      <div>
+        {" "}
+        <TaskForm />
+      </div>
     </>
   );
 }
