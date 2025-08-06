@@ -1,6 +1,7 @@
 export interface ActionType {
   AddTask: string;
-  DisplayTask: string;
+  SavingLocal: string;
+  ToggleTask: string;
   RemoveTask: string;
   UpdateTask: string;
 }
@@ -12,6 +13,7 @@ export interface TaskType {
   priority?: string;
   category?: string;
   user?: string;
+  completed?: boolean;
 }
 
 export interface Actions {
@@ -23,12 +25,13 @@ export interface payloadType extends TaskType {}
 
 export let ACTIONS: ActionType = {
   AddTask: "addtask",
-  DisplayTask: "displayTask",
+  ToggleTask: "displayTask",
   RemoveTask: "removetask",
   UpdateTask: "updatetask",
+  SavingLocal: "savingToLocal",
 };
 
-export function TaskReducer(Tasks: TaskType[], action: Actions):TaskType[] {
+export function TaskReducer(Tasks: TaskType[], action: Actions): TaskType[] {
   switch (action.type) {
     case ACTIONS.AddTask:
       return [
@@ -40,12 +43,24 @@ export function TaskReducer(Tasks: TaskType[], action: Actions):TaskType[] {
           category: action.payload.category,
           date: action.payload.date,
           user: action.payload.user,
+          completed: false,
         },
       ];
-    
-     default:
-      return Tasks;   
+
+    case ACTIONS.RemoveTask:
+      return Tasks.filter((task) => task.id !== action.payload.id);
+
+    case ACTIONS.ToggleTask:
+      return Tasks.map((task) =>
+        task.id === action.payload.id
+          ? { ...task, completed: !task.completed }
+          : task
+      );
+
+    case ACTIONS.SavingLocal:
+      localStorage.setItem("task", JSON.stringify(Tasks));
+      return Tasks;
+    default:
+      return Tasks;
   }
-
-
 }

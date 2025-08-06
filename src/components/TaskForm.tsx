@@ -110,8 +110,24 @@ export default function TaskForm() {
         category: formData.category,
         date: formData.date,
         user: formData.user,
+        completed: false,
       },
     });
+
+    dispatch({
+      type: ACTIONS.SavingLocal,
+      payload: {
+        id: formData.id,
+        name: formData.name,
+        priority: formData.priority,
+        category: formData.category,
+        date: formData.date,
+        user: formData.user,
+        completed: false,
+      },
+    });
+
+     const SavedTasks = JSON.parse(localStorage.getItem("task") || "[]");
 
     setFormData({
       id: "",
@@ -147,6 +163,31 @@ export default function TaskForm() {
           <span key={task.id}>
             {" "}
             {task.name} {task.priority} {task.category} {task.date} {task.user}
+            {task.completed}
+            <button
+              className="border px-2 rounded-md"
+              onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+                e.preventDefault();
+                dispatch({
+                  type: ACTIONS.RemoveTask,
+                  payload: { id: task.id },
+                });
+              }}
+            >
+              {" "}
+              Delete
+            </button>
+            <button
+              onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+                e.preventDefault();
+                dispatch({
+                  type: ACTIONS.ToggleTask,
+                  payload: { id: task.id },
+                });
+              }}
+            >
+              {task.completed ? "complete" : "incomplete"}
+            </button>
           </span>
         ))}
       </div>
