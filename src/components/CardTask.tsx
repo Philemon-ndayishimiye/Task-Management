@@ -1,12 +1,12 @@
-import React, { useReducer } from "react";
+import React from "react";
 import type { TaskType } from "../reducer/TaskReducer";
 import { IoIosNotificationsOutline } from "react-icons/io";
-import { BsThreeDotsVertical } from "react-icons/bs";
 import { Button } from "./Button";
 import type { ButtonType } from "../types/InputType";
-import { TaskReducer, ACTIONS } from "../reducer/TaskReducer";
+import { ACTIONS } from "../reducer/TaskReducer";
 import { IoMdDoneAll } from "react-icons/io";
 import { IoClose } from "react-icons/io5";
+import { useTask } from "../hooks/useTask";
 
 interface CardType extends TaskType {
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -17,17 +17,15 @@ interface props {
 }
 
 export const CardTask: React.FC<props> = ({ CardData }) => {
-  const SavedTasks = JSON.parse(localStorage.getItem("task") || "[]");
-  const [tasks, dispatch] = useReducer(TaskReducer, SavedTasks);
+  const { dispatch } = useTask();
 
   const Deletebtn: ButtonType = {
     label: "Delete",
     type: "button",
-    onClick: (e: React.MouseEvent<HTMLButtonElement>) => {
-      e.preventDefault();
+    onClick: (event: React.MouseEvent<HTMLButtonElement>) => {
       dispatch({
         type: ACTIONS.RemoveTask,
-        payload: { id: SavedTasks.id },
+        payload: { id: CardData.id },
       });
     },
   };
@@ -35,7 +33,6 @@ export const CardTask: React.FC<props> = ({ CardData }) => {
   const Updatebtn: ButtonType = {
     label: "Update",
     type: "button",
-    onClick: CardData.onClick,
   };
   return (
     <div
@@ -60,13 +57,9 @@ export const CardTask: React.FC<props> = ({ CardData }) => {
               3
             </h1>
           </div>
-
           {CardData.completed === false ? (
             <IoClose
-              className="text-gray-500 cursor-pointer"
-              onClick={(e: React.MouseEvent<SVGElement>) => {
-                e.preventDefault();
-                CardData.completed = true;
+              onClick={(event: React.MouseEvent<SVGElement>) => {
                 dispatch({
                   type: ACTIONS.ToggleTask,
                   payload: { id: CardData.id },
@@ -75,10 +68,7 @@ export const CardTask: React.FC<props> = ({ CardData }) => {
             />
           ) : (
             <IoMdDoneAll
-              className="text-gray-500 cursor-pointer"
-              onClick={(e: React.MouseEvent<SVGElement>) => {
-                e.preventDefault();
-                CardData.completed = false;
+              onClick={(event: React.MouseEvent<SVGElement>) => {
                 dispatch({
                   type: ACTIONS.ToggleTask,
                   payload: { id: CardData.id },

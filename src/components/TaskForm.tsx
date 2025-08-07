@@ -1,22 +1,15 @@
-import React, { useReducer, useState } from "react";
+import React, { useState } from "react";
 import { Input } from "./Input";
 import type { InputType, SelectType, ButtonType } from "../types/InputType";
 import { SelectComp } from "./Select";
 import { Button } from "./Button";
-import { TaskReducer, ACTIONS } from "../reducer/TaskReducer";
-import type {
-  ActionType,
-  payloadType,
-  Actions,
-  TaskType,
-} from "../reducer/TaskReducer";
-
-// interface TypeDispatch extends ActionType {}
+import {  ACTIONS } from "../reducer/TaskReducer";
+import { useNavigate } from "react-router-dom";
+import { useTask } from "../hooks/useTask";
 
 export default function TaskForm() {
-  // const SavedTask = JSON.parse(localStorage.getItem("Tasks") || "[]");
-  const SavedTasks = JSON.parse(localStorage.getItem("task") || "[]");
-  const [tasks, dispatch] = useReducer(TaskReducer, SavedTasks);
+  const { dispatch } = useTask();
+  const Navigate = useNavigate();
   const [formData, setFormData] = useState({
     id: "",
     name: "",
@@ -138,8 +131,7 @@ export default function TaskForm() {
       user: "",
     });
 
-    console.log(formData);
-    // localStorage.setItem("Tasks", JSON.stringify(SavedTask));
+    Navigate("/");
   };
 
   return (
@@ -156,41 +148,6 @@ export default function TaskForm() {
 
           <Button buttonData={buttonDat} />
         </form>
-      </div>
-
-      <div>
-        {tasks.map((taskSaved: TaskType) => (
-          <span key={taskSaved.id}>
-            {" "}
-            {taskSaved.name} {taskSaved.priority} {taskSaved.category}{" "}
-            {taskSaved.date} {taskSaved.user}
-            {taskSaved.completed}
-            <button
-              className="border px-2 rounded-md"
-              onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
-                e.preventDefault();
-                dispatch({
-                  type: ACTIONS.RemoveTask,
-                  payload: { id: taskSaved.id },
-                });
-              }}
-            >
-              {" "}
-              Delete
-            </button>
-            <button
-              onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
-                e.preventDefault();
-                dispatch({
-                  type: ACTIONS.ToggleTask,
-                  payload: { id: taskSaved.id },
-                });
-              }}
-            >
-              {taskSaved.completed ? "complete" : "incomplete"}
-            </button>
-          </span>
-        ))}
       </div>
     </>
   );

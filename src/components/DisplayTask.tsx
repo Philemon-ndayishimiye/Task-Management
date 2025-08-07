@@ -15,17 +15,7 @@ export default function DisplayTask() {
 
       <div className="grid grid-cols-3 gap-5">
         {Task.map((task) => {
-          const inputCard: TaskType = {
-            id: task.id,
-            name: task.name,
-            date: task.date,
-            priority: task.priority,
-            user: task.user,
-            category: task.category,
-            completed: task.completed,
-            createdAt: task.createdAt,
-          };
-          return <CardTask CardData={inputCard} />;
+          return <CardTask key={task.id} CardData={task} />;
         })}
       </div>
     </div>

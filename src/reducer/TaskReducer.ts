@@ -55,8 +55,36 @@ export function TaskReducer(Tasks: TaskType[], action: Actions): TaskType[] {
 
     case ACTIONS.RemoveTask:
       const UpdateTask = Tasks.filter((task) => task.id !== action.payload.id);
-      localStorage.setItem("task", JSON.stringify(UpdateTask));
       return UpdateTask;
+
+    case ACTIONS.UpdateTask:
+      const updatedTasks = Tasks.map((task) => {
+        if (task.id === action.payload.id) {
+          return {
+            id: task.id,
+            name: action.payload.name,
+            date: action.payload.date,
+            priority: action.payload.priority,
+            category: action.payload.category,
+            completed: action.payload.completed,
+            createdAt: task.createdAt,
+            user: action.payload.user,
+          };
+        } else {
+          return {
+            id: task.id,
+            name: task.name,
+            date: task.date,
+            priority: task.priority,
+            category: task.category,
+            completed: task.completed,
+            createdAt: task.createdAt,
+            user: task.user,
+          };
+        }
+      });
+
+      return updatedTasks;
 
     case ACTIONS.ToggleTask:
       return Tasks.map((task) =>
