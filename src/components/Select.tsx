@@ -12,7 +12,7 @@ export const SelectComp: React.FC<props> = ({ select }) => {
       value={select.value}
       onChange={select.onChange}
       className="
-    block w-full
+    block w-full my-4
     border border-gray-300 rounded-md
     bg-white
     py-2 px-3

@@ -59,6 +59,7 @@ export const CardTask: React.FC<props> = ({ CardData }) => {
           </div>
           {CardData.completed === false ? (
             <IoClose
+              className="cursor-pointer text-red-500"
               onClick={(event: React.MouseEvent<SVGElement>) => {
                 dispatch({
                   type: ACTIONS.ToggleTask,
@@ -68,6 +69,7 @@ export const CardTask: React.FC<props> = ({ CardData }) => {
             />
           ) : (
             <IoMdDoneAll
+              className="cursor-pointer text-green-800"
               onClick={(event: React.MouseEvent<SVGElement>) => {
                 dispatch({
                   type: ACTIONS.ToggleTask,

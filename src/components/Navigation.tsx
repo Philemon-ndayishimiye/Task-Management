@@ -1,42 +1,19 @@
 import React from "react";
-import { Button } from "./Button";
-import type { ButtonType } from "../types/InputType";
 import { IoNotifications } from "react-icons/io5";
 import { FaMessage } from "react-icons/fa6";
-import TaskForm from "./TaskForm";
 import images1 from "../assets/images.jpg";
-import { CardTask } from "./CardTask";
-import type { TaskType } from "../reducer/TaskReducer";
+import { Link } from "react-router-dom";
 
 export default function Navigation() {
-  const [hidden, setIshidden] = React.useState(false);
-  const handleCLick = () => {
-    setIshidden(!false);
-  };
-
-  const dataButtons: ButtonType = {
-    label: "Add Tak ",
-    onClick: handleCLick,
-    type: "button",
-  };
-
-  const cardData: TaskType = {
-    id: 1,
-    name: "Coding",
-    priority: "Low",
-    category: "money",
-    date: "25-3-2025",
-    user: "philemon",
-    createdAt: new Date().toISOString().split("T")[0],
-    completed: true,
-  };
   return (
     <>
       <div className=" bg-blue-400 flex justify-between py-3 px-7">
         <div>
-          <h1 className="text-white font-bold text-2xl cursor-pointer hover:text-green-400">
-            Team Task Tracker
-          </h1>
+          <Link to="/">
+            <h1 className="text-white font-bold text-2xl cursor-pointer hover:text-green-400">
+              Team Task Tracker
+            </h1>
+          </Link>
         </div>
 
         <div className="flex items-center justify-center gap-[22px]">
