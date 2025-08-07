@@ -4,9 +4,13 @@ import { Button } from "./Button";
 import { SelectComp } from "../components/Select";
 import type { InputType, SelectType, ButtonType } from "../types/InputType";
 import { useTask } from "../hooks/useTask";
+import type { TaskType } from "../reducer/TaskReducer";
+import { CardTask } from "./CardTask";
 
 export default function FilterComp() {
-  const {Task} = useTask();
+  const { Task } = useTask();
+
+  const [filterData, setFilter] = useState<TaskType[]>([]);
   const [formData, setFormData] = useState({
     id: "",
     name: "",
@@ -88,39 +92,49 @@ export default function FilterComp() {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    
-  //  const FilterData= Task.filter((tasks)=>{tasks.name===formData.name || tasks.user===formData.user || tasks.priority===formData.priority || tasks.date===formData.date || tasks.category===formData.category})
+
+    const FilterData: TaskType[] = Task.filter((tasks) => {
+      return (
+        tasks.name === formData.name ||
+        tasks.user === formData.user ||
+        tasks.priority === formData.priority ||
+        tasks.date === formData.date ||
+        tasks.category === formData.category ||
+        tasks.user === formData.user
+      );
+    });
+
+    setFilter(FilterData);
   };
   return (
-   <>
-    <div className="py-[40px] px-[30px]">
-      <form onSubmit={handleSubmit}>
-        <div className="flex gap-7">
-          <Input input={AssignedUser} />
-          <Input input={InputName} />
-        </div>
+    <>
+      <div className="py-[40px] px-[30px]">
+        <form onSubmit={handleSubmit}>
+          <div className="flex gap-7">
+            <Input input={AssignedUser} />
+            <Input input={InputName} />
+          </div>
 
-        <div className="flex gap-7">
-          <SelectComp select={Priority} />
-          <SelectComp select={Category} />
-        </div>
+          <div className="flex gap-7">
+            <SelectComp select={Priority} />
+            <SelectComp select={Category} />
+          </div>
 
-        <div className="flex gap-7 ">
-          <Input input={AssignedDate} />
-          <Input input={DueDate} />
-        </div>
+          <div className="flex gap-7 mr-[49%]">
+            <Input input={DueDate} />
+          </div>
 
-        <div className="flex justify-center items-center">
-          <Button buttonData={buttonDat} />
-        </div>
-      </form>
-    </div>
+          <div className="flex justify-center items-center">
+            <Button buttonData={buttonDat} />
+          </div>
+        </form>
+      </div>
 
-    <div>
-       {/* {
-        
-       } */}
-    </div>
-   </>
+      <div className="grid grid-cols-3 gap-5 py-[30px]">
+        {filterData.map((data) => {
+          return <CardTask key={data.id} CardData={data} />;
+        })}
+      </div>
+    </>
   );
 }

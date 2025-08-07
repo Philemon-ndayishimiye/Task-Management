@@ -5,8 +5,6 @@ import FilterComp from "./FilterComp";
 
 export default function DisplayTask() {
   const { Task } = useTask();
-
-  console.log(Task);
   return (
     <>
       <div>
@@ -18,7 +16,7 @@ export default function DisplayTask() {
           <h1 className="text-center font-semibold text-[23px]">All Tasks</h1>
         </div>
 
-        <div className="grid grid-cols-3 gap-5">
+        <div className=" mt-[20px] flex flex-wrap gap-4">
           {Task.map((task) => {
             return <CardTask key={task.id} CardData={task} />;
           })}
