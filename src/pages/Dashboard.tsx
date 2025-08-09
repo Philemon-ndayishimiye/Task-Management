@@ -4,7 +4,7 @@ import Navigation from "../components/Navigation";
 
 export default function Dashboard() {
   return (
-    <div className="grid grid-cols-[200px_1fr] pt-1 mx-3">
+    <div className="grid grid-cols-[200px_1fr] pt-1 mx-3 pb-10">
       <div>
         <Aside />
       </div>
@@ -12,7 +12,6 @@ export default function Dashboard() {
       <div>
         <Navigation />
         <DisplayTask />
-        
       </div>
     </div>
   );
