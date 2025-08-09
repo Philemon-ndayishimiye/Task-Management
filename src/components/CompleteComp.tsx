@@ -2,20 +2,20 @@ import React from "react";
 import { useTask } from "../hooks/useTask";
 import { CardTask } from "./CardTask";
 
-export default function IncompleteComp() {
+export default function CompleteComp() {
   const { Task } = useTask();
 
-  const incompleteTask = Task.filter((task) => task.completed === false);
+  const CompleteTask = Task.filter((task) => task.completed === true);
   return (
     <>
       <div className="py-[30px]">
         <h1 className="text-center font-semibold text-[23px]">
-          Incomplete Tasks
+          Complete Tasks
         </h1>
       </div>
 
       <div className=" mt-[20px] flex flex-wrap gap-4">
-        {incompleteTask.map((tasks) => {
+        {CompleteTask.map((tasks) => {
           return <CardTask key={tasks.id} CardData={tasks} />;
         })}
       </div>

@@ -1,8 +1,8 @@
 import Aside from "../components/Aside";
-import IncompleteComp from "../components/IncompleteComp";
+import CompleteComp from "../components/CompleteComp";
 import Navigation from "../components/Navigation";
 
-export default function Incomplete() {
+export default function CompletePage() {
   return (
     <div className="grid grid-cols-[200px_1fr] pt-1 mx-3 pb-10">
       <div>
@@ -11,7 +11,7 @@ export default function Incomplete() {
 
       <div>
         <Navigation />
-        <IncompleteComp />
+        <CompleteComp />
       </div>
     </div>
   );

@@ -30,7 +30,7 @@ export default function Aside() {
         </div>
       </Link>
 
-      <Link to="/incomplete">
+      <Link to="/complete">
         <div className="flex py-1 px-3 gap-3 mt-10 cursor-pointer hover:bg-blue-500 hover:text-white">
           <div className="text-2xl">
             <GrCompliance />
