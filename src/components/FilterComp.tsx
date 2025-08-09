@@ -130,7 +130,7 @@ export default function FilterComp() {
         </form>
       </div>
 
-      <div className="grid grid-cols-3 gap-5 py-[30px]">
+      <div className="mt-[20px] flex flex-wrap gap-4">
         {filterData.map((data) => {
           return <CardTask key={data.id} CardData={data} />;
         })}

@@ -58,7 +58,7 @@ export const CardTask: React.FC<props> = ({ CardData }) => {
   const InputName: InputType = {
     name: "name",
     value: updateData.name,
-    placeholder: "Enter task name",
+    placeholder: " Task name",
     type: "string",
     onChange: handleChange,
   };
@@ -74,7 +74,7 @@ export const CardTask: React.FC<props> = ({ CardData }) => {
     name: "user",
     value: updateData.user,
     type: "text",
-    placeholder: "Enter Assigne",
+    placeholder: "Assigne",
     onChange: handleChange,
   };
 
@@ -114,7 +114,7 @@ export const CardTask: React.FC<props> = ({ CardData }) => {
     <>
       <div
         key={CardData.id}
-        className={`px-[60px] py-[8px] shadow-md p-2 rounded-2xl  min-h-[250px] ${
+        className={`px-[60px] py-[8px] shadow-md p-2 rounded-2xl  ${
           CardData.completed === false
             ? "bg-gray-100 shadow-sm"
             : "bg-amber-100"
