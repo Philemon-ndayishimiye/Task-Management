@@ -1,15 +1,12 @@
 import React from "react";
 import { useTask } from "../hooks/useTask";
 import { CardTask } from "./CardTask";
-import FilterComp from "./FilterComp";
+// import FilterComp from "./FilterComp";
 
 export default function DisplayTask() {
   const { Task } = useTask();
   return (
     <>
-      <div>
-        <FilterComp />
-      </div>
 
       <div>
         <div>
