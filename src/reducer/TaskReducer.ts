@@ -1,11 +1,4 @@
-export interface ActionType {
-  AddTask: string;
-  SavingLocal: string;
-  ToggleTask: string;
-  RemoveTask: string;
-  UpdateTask: string;
-}
-
+import type { ActionType } from "../types/reducerType";
 export interface TaskType {
   id?: string | number;
   name?: string;
@@ -17,26 +10,11 @@ export interface TaskType {
   createdAt?: string;
 }
 
-export interface Actions {
-  type: string;
-  payload: payloadType;
-}
-
-export interface payloadType extends TaskType {}
-
-export let ACTIONS: ActionType = {
-  AddTask: "addtask",
-  ToggleTask: "displayTask",
-  RemoveTask: "removetask",
-  UpdateTask: "updatetask",
-  SavingLocal: "savingToLocal",
-};
-
 // every action must have its type and pyaload
 
-export function TaskReducer(Tasks: TaskType[], action: Actions): TaskType[] {
+export function TaskReducer(Tasks: TaskType[], action: ActionType): TaskType[] {
   switch (action.type) {
-    case ACTIONS.AddTask:
+    case "Add Task":
       return [
         ...Tasks,
         {
@@ -51,11 +29,11 @@ export function TaskReducer(Tasks: TaskType[], action: Actions): TaskType[] {
         },
       ];
 
-    case ACTIONS.RemoveTask:
+    case "Remove task":
       const UpdateTask = Tasks.filter((task) => task.id !== action.payload.id);
       return UpdateTask;
 
-    case ACTIONS.UpdateTask:
+    case "Update Task":
       const updatedTasks = Tasks.map((task) => {
         if (task.id === action.payload.id) {
           return {
@@ -84,7 +62,7 @@ export function TaskReducer(Tasks: TaskType[], action: Actions): TaskType[] {
 
       return updatedTasks;
 
-    case ACTIONS.ToggleTask:
+    case "Toggle Task":
       return Tasks.map((task) =>
         task.id === action.payload.id
           ? { ...task, completed: !task.completed }

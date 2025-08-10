@@ -3,7 +3,6 @@ import type { TaskType } from "../reducer/TaskReducer";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { Button } from "./Button";
 import type { ButtonType } from "../types/InputType";
-import { ACTIONS } from "../reducer/TaskReducer";
 import { IoMdDoneAll } from "react-icons/io";
 import { IoClose } from "react-icons/io5";
 import { useTask } from "../hooks/useTask";
@@ -49,7 +48,7 @@ export const CardTask: React.FC<props> = ({ CardData }) => {
     type: "button",
     onClick: (event: React.MouseEvent<HTMLButtonElement>) => {
       dispatch({
-        type: ACTIONS.RemoveTask,
+        type: "Remove task",
         payload: { id: CardData.id },
       });
     },
@@ -141,7 +140,7 @@ export const CardTask: React.FC<props> = ({ CardData }) => {
                 className="cursor-pointer text-red-500"
                 onClick={(event: React.MouseEvent<SVGElement>) => {
                   dispatch({
-                    type: ACTIONS.ToggleTask,
+                    type: "Toggle Task",
                     payload: { id: CardData.id },
                   });
                 }}
@@ -151,7 +150,7 @@ export const CardTask: React.FC<props> = ({ CardData }) => {
                 className="cursor-pointer text-green-800"
                 onClick={(event: React.MouseEvent<SVGElement>) => {
                   dispatch({
-                    type: ACTIONS.ToggleTask,
+                    type: "Toggle Task",
                     payload: { id: CardData.id },
                   });
                 }}
@@ -214,7 +213,7 @@ export const CardTask: React.FC<props> = ({ CardData }) => {
                   onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
                     event.preventDefault();
                     dispatch({
-                      type: ACTIONS.UpdateTask,
+                      type: "Update Task",
                       payload: {
                         id: CardData.id,
                         name: updateData.name,

@@ -3,7 +3,6 @@ import { Input } from "./Input";
 import type { InputType, SelectType, ButtonType } from "../types/InputType";
 import { SelectComp } from "./Select";
 import { Button } from "./Button";
-import {  ACTIONS } from "../reducer/TaskReducer";
 import { useNavigate } from "react-router-dom";
 import { useTask } from "../hooks/useTask";
 
@@ -96,7 +95,7 @@ export default function TaskForm() {
     // SavedTask.push(formData);
 
     dispatch({
-      type: ACTIONS.AddTask,
+      type: "Add Task",
       payload: {
         id: formData.id,
         name: formData.name,
@@ -106,19 +105,6 @@ export default function TaskForm() {
         user: formData.user,
         completed: false,
         createdAt: new Date().toISOString().split("T")[0],
-      },
-    });
-
-    dispatch({
-      type: ACTIONS.SavingLocal,
-      payload: {
-        id: formData.id,
-        name: formData.name,
-        priority: formData.priority,
-        category: formData.category,
-        date: formData.date,
-        user: formData.user,
-        completed: false,
       },
     });
 

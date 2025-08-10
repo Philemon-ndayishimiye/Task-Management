@@ -68,10 +68,6 @@ export default function FilterComp() {
     onChange: handleSelectChange,
   };
 
-  const buttonDat: ButtonType = {
-    label: "Filter",
-    type: "submit",
-  };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -86,6 +82,7 @@ export default function FilterComp() {
       tasks.category === formData.category ||
       tasks.user === formData.user
     );
+  
   });
 
   return (
