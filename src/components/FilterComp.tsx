@@ -106,9 +106,7 @@ export default function FilterComp() {
             <Input input={DueDate} />
           </div>
 
-          <div className="flex justify-center items-center">
-            <Button buttonData={buttonDat} />
-          </div>
+          
         </form>
       </div>
 

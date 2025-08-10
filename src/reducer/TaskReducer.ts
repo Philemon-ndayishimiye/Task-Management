@@ -32,6 +32,8 @@ export let ACTIONS: ActionType = {
   SavingLocal: "savingToLocal",
 };
 
+// every action must have its type and pyaload
+
 export function TaskReducer(Tasks: TaskType[], action: Actions): TaskType[] {
   switch (action.type) {
     case ACTIONS.AddTask:
@@ -49,10 +51,6 @@ export function TaskReducer(Tasks: TaskType[], action: Actions): TaskType[] {
         },
       ];
 
-    case ACTIONS.SavingLocal:
-      localStorage.setItem("task", JSON.stringify(Tasks));
-      return Tasks;
-
     case ACTIONS.RemoveTask:
       const UpdateTask = Tasks.filter((task) => task.id !== action.payload.id);
       return UpdateTask;
@@ -66,7 +64,7 @@ export function TaskReducer(Tasks: TaskType[], action: Actions): TaskType[] {
             date: action.payload.date,
             priority: action.payload.priority,
             category: action.payload.category,
-            completed: action.payload.completed,
+            completed: task.completed,
             createdAt: task.createdAt,
             user: action.payload.user,
           };
