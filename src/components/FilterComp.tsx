@@ -10,7 +10,7 @@ import { CardTask } from "./CardTask";
 export default function FilterComp() {
   const { Task } = useTask();
 
-  const [filterData, setFilter] = useState<TaskType[]>([]);
+  // const [filterData, setFilter] = useState<TaskType[]>([]);
   const [formData, setFormData] = useState({
     id: "",
     name: "",
@@ -92,20 +92,20 @@ export default function FilterComp() {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    const FilterData: TaskType[] = Task.filter((tasks) => {
-      return (
-        tasks.name === formData.name ||
-        tasks.user === formData.user ||
-        tasks.priority === formData.priority ||
-        tasks.date === formData.date ||
-        tasks.category === formData.category ||
-        tasks.user === formData.user
-      );
-    });
-
-    setFilter(FilterData);
   };
+
+  const FilterData = Task.filter((tasks) => {
+    return (
+      tasks.name === formData.name ||
+      tasks.user === formData.user ||
+      tasks.priority === formData.priority ||
+      tasks.date === formData.date ||
+      tasks.category === formData.category ||
+      tasks.user === formData.user
+    );
+  });
+
+  // setFilter(FilterData);
   return (
     <>
       <div className="py-[40px] px-[30px]">
@@ -131,7 +131,7 @@ export default function FilterComp() {
       </div>
 
       <div className="mt-[20px] flex flex-wrap gap-4">
-        {filterData.map((data) => {
+        {FilterData.map((data) => {
           return <CardTask key={data.id} CardData={data} />;
         })}
       </div>
