@@ -4,13 +4,10 @@ import { Button } from "./Button";
 import { SelectComp } from "../components/Select";
 import type { InputType, SelectType, ButtonType } from "../types/InputType";
 import { useTask } from "../hooks/useTask";
-import type { TaskType } from "../reducer/TaskReducer";
 import { CardTask } from "./CardTask";
 
 export default function FilterComp() {
   const { Task } = useTask();
-
-  // const [filterData, setFilter] = useState<TaskType[]>([]);
   const [formData, setFormData] = useState({
     id: "",
     name: "",
@@ -34,14 +31,6 @@ export default function FilterComp() {
     }));
   };
 
-  const IdInput: InputType = {
-    name: "id",
-    value: formData.id,
-    placeholder: "type Id",
-    type: "number",
-    onChange: handleChange,
-  };
-
   const InputName: InputType = {
     name: "name",
     value: formData.name,
@@ -55,12 +44,6 @@ export default function FilterComp() {
     value: formData.date,
     type: "date",
     onChange: handleChange,
-  };
-
-  const AssignedDate: InputType = {
-    name: "assigned",
-    value: new Date().toISOString().split("T")[0],
-    type: "text",
   };
 
   const AssignedUser: InputType = {
@@ -105,7 +88,6 @@ export default function FilterComp() {
     );
   });
 
-  // setFilter(FilterData);
   return (
     <>
       <div className="py-[40px] px-[30px]">
